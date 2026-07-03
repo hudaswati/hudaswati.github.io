@@ -224,6 +224,18 @@
     background: linear-gradient(90deg, rgba(0,0,0,0.28), transparent);
     z-index:2;
   }
+  .preview-btn{
+    position:absolute; bottom:10px; left:10px; z-index:3;
+    width:38px; height:38px; border-radius:50%; border:none; cursor:pointer;
+    background: rgba(16,64,47,0.82); color: var(--gold-soft);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: background .25s ease, transform .25s ease;
+  }
+  .preview-btn:hover, .preview-btn:focus-visible{ background: var(--gold); color: var(--emerald); transform: scale(1.08); }
+  .preview-btn svg{ width:18px; height:18px; }
+  .book-actions{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+  .btn-sm{ padding:10px 20px; font-size:0.95rem; }
   .book-cover{
     width:100%; height:100%; object-fit:cover; display:block; position:relative; z-index:1;
   }
@@ -304,6 +316,15 @@
     display:none; align-items:center; justify-content:center; z-index:100; padding:20px;
   }
   .modal-overlay.active{ display:flex; }
+  .modal-wide{ max-width: 760px; }
+  .preview-frame-wrap{
+    width:100%; height:70vh; border:1px solid var(--paper-line); background:#3a3a3a;
+  }
+  .preview-frame-wrap iframe{ width:100%; height:100%; border:none; }
+  .preview-fallback{
+    display:none; height:100%; align-items:center; justify-content:center; text-align:center;
+    font-family:'Noto Nastaliq Urdu',serif; color:#EFE6D3; padding:20px; font-size:1.1rem;
+  }
   .modal{
     background: var(--parchment); max-width: 480px; width:100%;
     padding: 34px; position:relative; border-top: 4px solid var(--gold);
@@ -352,7 +373,7 @@
 <header>
   <div class="nav-wrap">
     <div class="brand">جاوید احمد خان
-        <!-- <small>Prof. Javed Ahmed Khan</small> -->
+      <!-- <small>Prof. Javed Ahmed Khan</small> -->
     </div>
     <nav>
       <ul>
@@ -411,6 +432,7 @@
         <p class="ur">پروفیسر جاوید احمد خان ایک ممتاز عالمِ دین، خطیب اور تعلیمی شخصیت ہیں جنہوں نے اپنی زندگی درس و تدریس اور دینِ اسلام کی خدمت کے لیے وقف کر رکھی ہے۔ آپ نے گورنمنٹ انٹر کالج رحیم کوٹ میں بحیثیتِ پرنسپل خدمات سرانجام دیں اور اسی عہدے سے سبکدوش ہوئے۔</p>
         <p class="ur">اس کے ساتھ ساتھ آپ بالاکوٹ اور ہزارہ ڈویژن کے وسیع علاقے میں ایک معروف اور مقبول خطیب کی حیثیت سے پہچانے جاتے ہیں، جہاں آپ کئی بڑی مساجد میں توحید، قرآنِ کریم کی تعلیمات، اصلاحِ امت اور معرفتِ الٰہی جیسے موضوعات پر خطبات ارشاد فرماتے ہیں۔</p>
         <p class="ur">آپ کا فکری و علمی رجحان مسلکِ دیوبند سے وابستہ ہے، اور آپ کے خطبات تحقیق، حوالہ جات اور دلائل کی بنیاد پر مرتب کیے جاتے ہیں، جن کا بنیادی مقصد سامعین میں اللہ تعالیٰ کی معرفت کو گہرا اور مضبوط کرنا ہے۔</p>
+        <br>
         <p class="ur">پروفیسر جاوید احمد خان، مولانا ولی الرحمٰن رحمۃ اللہ علیہ کے سب سے بڑے صاحبزادے ہیں، جو بالاکوٹ کے علاقے کی ایک نمایاں اور معروف دینی شخصیت تھے۔ حضرت مولانا رحمہ اللہ کے انتقال کے بعد امامت، خطابت اور دینی خدمات کی ذمہ داریاں بھی انہوں نے سنبھالیں اور والد محترم کے مشن کو جاری رکھا۔</p>
       </div>
       <div class="facts">
@@ -449,13 +471,19 @@
               <span>خطباتِ جاوید</span>
             </div>
             <img class="book-cover" src="images/khutbat-e-javed.jpeg" alt="خطباتِ جاوید سرورق" onerror="this.style.display='none'">
+            <button class="preview-btn preview-trigger" data-pdf="books/khutbat-e-javed.pdf" data-title="خطباتِ جاوید" aria-label="پیش نظارہ" title="پیش نظارہ">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
           </div>
         </div>
         <div class="book-body">
           <div class="book-title-ur">خطباتِ جاوید</div>
           <div class="book-title-en">Khutbat-e-Javed</div>
           <p class="book-desc">مصنف کے منتخب اسلامی خطبات کا مجموعہ، جس کا بنیادی مقصد قاری کے دل میں معرفتِ الٰہی (توحید) کو راسخ کرنا اور قرآن و سنت کی روشنی میں عملی زندگی گزارنے کی رہنمائی فراہم کرنا ہے۔ ہر خطبہ وسیع مطالعے اور حوالہ جات کی بنیاد پر مرتب کیا گیا ہے۔</p>
-          <button class="btn btn-primary order-btn" data-book="خطباتِ جاوید (Khutbat-e-Javed)">کتاب منگوائیں</button>
+          <div class="book-actions">
+            <button class="btn btn-outline btn-sm preview-trigger" data-pdf="books/khutbat-e-javed.pdf" data-title="خطباتِ جاوید" style="border-color:var(--paper-line); color:var(--emerald);">پیش نظارہ</button>
+            <button class="btn btn-primary btn-sm order-btn" data-book="خطباتِ جاوید (Khutbat-e-Javed)">کتاب منگوائیں</button>
+          </div>
         </div>
       </div>
 
@@ -467,13 +495,19 @@
               <span>آذانِ سحر</span>
             </div>
             <img class="book-cover" src="images/azan-e-sehr.jpeg" alt="آذانِ سحر سرورق" onerror="this.style.display='none'">
+            <button class="preview-btn preview-trigger" data-pdf="books/azan-e-sehr.pdf" data-title="آذانِ سحر" aria-label="پیش نظارہ" title="پیش نظارہ">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
           </div>
         </div>
         <div class="book-body">
           <div class="book-title-ur">آذانِ سحر</div>
           <div class="book-title-en">Azan-e-Sehr</div>
           <p class="book-desc">مختلف اسلامی مواقع اور واقعات سے متعلق منظوم کلام پر مشتمل ایک خوبصورت شعری مجموعہ، جو دینی جذبات کو ادب کے پیرائے میں قاری تک پہنچاتا ہے۔</p>
-          <button class="btn btn-primary order-btn" data-book="آذانِ سحر (Azan-e-Sehr)">کتاب منگوائیں</button>
+          <div class="book-actions">
+            <button class="btn btn-outline btn-sm preview-trigger" data-pdf="books/azan-e-sehr.pdf" data-title="آذانِ سحر" style="border-color:var(--paper-line); color:var(--emerald);">پیش نظارہ</button>
+            <button class="btn btn-primary btn-sm order-btn" data-book="آذانِ سحر (Azan-e-Sehr)">کتاب منگوائیں</button>
+          </div>
         </div>
       </div>
 
@@ -485,13 +519,19 @@
               <span>الفوز العظیم</span>
             </div>
             <img class="book-cover" src="images/alfowz-ul-azeem.jpeg" alt="الفوز العظیم سرورق" onerror="this.style.display='none'">
+            <button class="preview-btn preview-trigger" data-pdf="books/alfowz-ul-azeem.pdf" data-title="الفوز العظیم" aria-label="پیش نظارہ" title="پیش نظارہ">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
           </div>
         </div>
         <div class="book-body">
           <div class="book-title-ur">الفوز العظیم</div>
           <div class="book-title-en">Alfawz-ul-Azeem</div>
           <p class="book-desc">قرآنِ مجید کی اُن سترہ (۱۷) مبارک آیات کا ترجمہ و تشریح جن میں لفظ "الفوز العظیم" مذکور ہے، پانچ مختلف مستند تفاسیر کی روشنی میں تحقیقی انداز میں پیش کیا گیا ہے۔</p>
-          <button class="btn btn-primary order-btn" data-book="الفوز العظیم (Alfawz-ul-Azeem)">کتاب منگوائیں</button>
+          <div class="book-actions">
+            <button class="btn btn-outline btn-sm preview-trigger" data-pdf="books/alfowz-ul-azeem.pdf" data-title="الفوز العظیم" style="border-color:var(--paper-line); color:var(--emerald);">پیش نظارہ</button>
+            <button class="btn btn-primary btn-sm order-btn" data-book="الفوز العظیم (Alfawz-ul-Azeem)">کتاب منگوائیں</button>
+          </div>
         </div>
       </div>
 
@@ -523,6 +563,19 @@
     <div class="fact-row"><span class="fact-label">ایزی پیسہ / جاز کیش نمبر</span><span class="fact-value">99999999999999</span></div>
     <div class="donate-cta">
       <a class="btn btn-outline" style="border-color:var(--paper-line); color:var(--ink);" href="https://wa.me/923109108193?text=السلام%20علیکم%2C%20میں%20عطیہ%20دینا%20چاہتا%2Fچاہتی%20ہوں" target="_blank" rel="noopener">واٹس ایپ پر رابطہ</a>
+    </div>
+  </div>
+</div>
+
+<!-- Preview Modal -->
+<div class="modal-overlay" id="previewModal">
+  <div class="modal modal-wide">
+    <button class="modal-close" id="previewClose" aria-label="بند کریں">&times;</button>
+    <h3 class="ur" id="previewTitle">پیش نظارہ</h3>
+    <p class="ur" style="font-size:0.95rem; color:var(--ink-soft); margin-bottom:14px;">یہ کتاب کے چند ابتدائی صفحات کا پیش نظارہ ہے۔ مکمل کتاب حاصل کرنے کے لیے آرڈر کریں۔</p>
+    <div class="preview-frame-wrap">
+      <iframe id="previewFrame" src="" title="کتاب کا پیش نظارہ"></iframe>
+      <div class="preview-fallback" id="previewFallback">پیش نظارہ فی الحال دستیاب نہیں ہے۔ جلد شامل کیا جائے گا۔</div>
     </div>
   </div>
 </div>
@@ -573,6 +626,37 @@
   const orderForm = document.getElementById('orderForm');
 
   const WHATSAPP_NUMBER = "923109108193";
+
+  const previewModal = document.getElementById('previewModal');
+  const previewFrame = document.getElementById('previewFrame');
+  const previewTitle = document.getElementById('previewTitle');
+  const previewFallback = document.getElementById('previewFallback');
+  const previewClose = document.getElementById('previewClose');
+
+  document.querySelectorAll('.preview-trigger').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const pdf = btn.dataset.pdf;
+      previewTitle.textContent = `پیش نظارہ — ${btn.dataset.title}`;
+      previewFrame.style.display = 'block';
+      previewFallback.style.display = 'none';
+      previewFrame.src = pdf;
+      previewModal.classList.add('active');
+    });
+  });
+
+  previewFrame.addEventListener('error', ()=>{
+    previewFrame.style.display = 'none';
+    previewFallback.style.display = 'flex';
+  });
+
+  function closePreview(){
+    previewModal.classList.remove('active');
+    previewFrame.src = '';
+  }
+  previewClose.addEventListener('click', closePreview);
+  previewModal.addEventListener('click', (e)=>{
+    if(e.target === previewModal) closePreview();
+  });
 
   document.querySelectorAll('.order-btn').forEach(btn=>{
     btn.addEventListener('click', ()=>{
